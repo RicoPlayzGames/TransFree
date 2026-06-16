@@ -26,3 +26,6 @@ Windows (PowerShell):
 Copy-Item Config.example.php Config.php
 ```
 Edit the config to use your database.
+
+wij hebben de upload en download functie gemaakt en zijn ook bezig met de comments neerzetten.
+verder hebben er nog geen functies die niet af zijn voor de huidige staat.
