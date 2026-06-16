@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($config['app_name']) ?></title>
+</head>
+<body>
+    <h1>Download <?= $upload["title"] ?></h1>
+
+    <a href="<?php echo $config["base_path"] ?>/public/uploads/<?php echo $upload["filename"] ?>">Download</a>
+</body>
+</html>
