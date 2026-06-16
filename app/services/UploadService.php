@@ -12,5 +12,16 @@ class UploadService {
         $uploadName = uniqid() . "_" . basename($file["name"]);
 
         move_uploaded_file($file["tmp_name"], $uploadPath . $uploadName);
+
+        $this->db->queryDatabase(
+            "INSERT INTO uploads (user_id, title, description, filename, created_at)
+            VALUES (:user_id, :title, :description, :filename, NOW())",
+            [
+                'user_id' => $userId,
+                'title' => $title,
+                'description' => $description,
+                'filename' => $uploadName
+            ]
+        );
     }
 }
