@@ -26,6 +26,6 @@ class UploadService {
             ]
         );
 
-        return $this->db->lastInsertId();
+        return $token;
     }
 }

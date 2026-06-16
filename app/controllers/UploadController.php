@@ -15,9 +15,15 @@ class UploadController {
         $description = $_POST['description'];
         $file = $_FILES['file'];
 
-        $this->uploadService->uploadFile($userId, $title, $description, $file);
+        $token = $this->uploadService->uploadFile(
+            $userId, 
+            $title, 
+            $description, 
+            $file
+        );
 
-        return "OK!";
-        exit();
+        $downloadUrl = $this->config['base_path'] . "/download/" . $token;
+
+        require __DIR__ . "/../../views/notifications/upload-succes.php";
     }
 }
