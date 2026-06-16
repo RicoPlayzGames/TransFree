@@ -1,5 +1,7 @@
 <?php
 
+
+
 session_start();
 
 require_once "core/Database.php";
@@ -32,8 +34,10 @@ $router->post('/upload', function() use ($db) {
     require_once "app/controllers/UploadController.php";
 });
 
-$router->get('/download', function() use ($db, $config) {
+$router->get('/download/:token', function($token) use ($db, $config) {
     $uploadModel = new UploadModel($db);
+    $upload = $uploadModel->getUploadByToken($token);
+    
     require "views/download.php";
 });
 

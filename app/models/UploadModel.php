@@ -13,4 +13,13 @@ class UploadModel {
             ['id' => $id]
         )->fetch();
     }
+
+    public function getUploadByToken($token) {
+        return $this->db->queryDatabase(
+            "SELECT * FROM uploads WHERE token = :token",
+            [
+                "token" => $token
+            ]
+        )->fetch();
+    }
 }
