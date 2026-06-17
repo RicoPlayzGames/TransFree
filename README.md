@@ -22,6 +22,19 @@ At this stage, there are no other unfinished features besides the ongoing commen
 - Session Protection on Download
 - Integrety Checks on Upload/Download
 
+## Test Results
+
+The core upload and download functionality is working, but there are still several usability improvements planned:
+
+- The **Get Started** button currently does not change when a user is logged in.
+- There is currently **no visual indication that a user is logged in**.
+- Users cannot **log out** yet.
+- File uploads do not provide a clear **success or failure message**.
+- After uploading, users only receive a share link and must manually copy it.
+- A dedicated **Copy Link** button is planned for easier sharing.
+- Users currently cannot view their **previously uploaded files**.
+- A file history/dashboard page is planned for managing uploaded files.
+
 ## Installation:
 1. Clone repository:
 
