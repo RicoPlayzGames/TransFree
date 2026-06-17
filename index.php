@@ -43,6 +43,11 @@ $router->post('/login', function() use ($db, $config) {
     $controller->login();
 });
 
+$router->get('/logout', function() {
+    $controller = new LogoutController();
+    $controller->logout();
+});
+
 $router->get('/upload', function() use ($db, $config) {
     $uploadModel = new UploadModel($db);
     require "views/upload.php";
