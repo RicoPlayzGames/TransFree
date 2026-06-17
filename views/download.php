@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: login");
+    header("Location: " . $config["base_path"] . "/login");
     exit;
 }
 
@@ -29,5 +29,8 @@ if (!isset($_SESSION["user_id"])) {
         </div>
     </div>
 
+    <h1>Download <?= htmlspecialchars($upload["title"]) ?></h1>
+
+    <a href="<?= htmlspecialchars($config["base_path"]) ?>/download/<?= htmlspecialchars($token) ?>/file">Download</a>
 </body>
 </html>

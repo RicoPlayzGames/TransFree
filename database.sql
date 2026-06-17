@@ -16,7 +16,8 @@ CREATE TABLE uploads (
   title varchar(255) NOT NULL,
   description TEXT,
   filename varchar(255),
-  token varchar(32),
+  file_hash varchar(64) NOT NULL,
+  token varchar(255),
   created_at datetime default CURRENT_TIMESTAMP,
 
   CONSTRAINT fk_upload_user
