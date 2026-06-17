@@ -9,6 +9,11 @@ We currently have the core upload and download functionality fully implemented a
 We are also actively working on adding a comment system for uploaded files.
 At this stage, there are no other unfinished features besides the ongoing comment system implementation.
 
+## Security Measures
+
+- Session Protection on Upload
+- Session Protection on Download
+- Integrety Checks on Upload/Download
 
 ## Installation:
 1. Clone repository:
