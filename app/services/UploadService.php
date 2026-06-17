@@ -12,7 +12,7 @@ class UploadService {
     public function uploadFile($userId, $title, $description, $file) {
         // define alle paths/tokens
         $uploadPath = __DIR__ . "/../../public/uploads/";
-        $uploadName = uniqid() . "_" . basename($file["name"]);4
+        $uploadName = uniqid() . "_" . basename($file["name"]);
          
         // Genereer een willekeurige unieke code voor de downloadlink
         $key = random_bytes(32); // Genereert 32 random bits
