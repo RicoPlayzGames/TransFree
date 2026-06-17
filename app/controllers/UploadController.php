@@ -12,7 +12,7 @@ class UploadController {
 
     public function uploadFile() {
         // Haal de gegevens op uit het formulier
-        $userId = 1;
+        $userId = $_SESSION["user_id"];
         $title = $_POST['title'];
         $description = $_POST['description'];
         $file = $_FILES['file'];
