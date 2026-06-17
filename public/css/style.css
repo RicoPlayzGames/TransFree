@@ -1,0 +1,86 @@
+.hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 80px 24px;
+    background-color: #ffffff;
+
+    font-family: 'Inter', sans-serif;
+}
+
+.hero-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1;
+    font-weight: 700;
+    color: #1A1A2E;
+
+    max-width: 900px;
+    margin-bottom: 24px;
+}
+
+.hero-title::after {
+    content: ".";
+    color: #ff4fa3;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: #4B4960;
+
+    max-width: 550px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.hero-primary {
+    background-color: #ff4fa3;
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.hero-primary:hover {
+    background-color: #c83f81;
+}
+
+.hero-secondary {
+    color: #1A1A2E;
+    text-decoration: none;
+    border: 1px solid #ff4fa3;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.hero-secondary:hover {
+    background-color: #fff0f7;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 70vh;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
