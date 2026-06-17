@@ -21,7 +21,7 @@
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     color: #1A1A2E;
     text-decoration: none;
     font-family: 'Sora', sans-serif;

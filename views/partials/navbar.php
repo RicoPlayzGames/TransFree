@@ -6,7 +6,9 @@ require_once __DIR__ . "/../../config/Config.php";
         <span class="navbar-mark">
             <image src="<?php echo $config["base_path"] ?>/public/assets/icons/plus.svg">
         </span>
-        Trans<span class="navbar-accent">Free</span>
+        <div>
+            Trans<span class="navbar-accent">Free</span>
+        </div>
     </a>
     <ul class="navbar-links">
         <li><a href="<?php echo $config["base_path"] ?>">Home</a></li>
