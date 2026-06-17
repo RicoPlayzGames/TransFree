@@ -9,10 +9,12 @@ require_once "core/Router.php";
 require_once "core/Helper.php";
 
 require_once "app/controllers/UploadController.php";
+require_once "app/controllers/DownloadController.php";
 
 require_once "app/models/UploadModel.php";
 
 require_once "app/services/UploadService.php";
+require_once "app/services/DownloadService.php";
 
 $config = require "config/Config.php";
 $db = new Database($config);
@@ -39,6 +41,11 @@ $router->get('/download/:token', function($token) use ($db, $config) {
     $upload = $uploadModel->getUploadByToken($token);
     
     require "views/download.php";
+});
+
+$router->get('/download/:token/file', function($token) use ($db) {
+    $controller = new DownloadController($db);
+    $controller->downloadFile($token);
 });
 
 $router->resolve();

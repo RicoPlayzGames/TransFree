@@ -6,8 +6,8 @@
     <title><?= htmlspecialchars($config['app_name']) ?></title>
 </head>
 <body>
-    <h1>Download <?= $upload["title"] ?></h1>
-
-    <a href="<?php echo $config["base_path"] ?>/public/uploads/<?php echo $upload["filename"] ?>">Download</a>
+    <h1>Download <?= htmlspecialchars($upload["title"]) ?></h1>
+    
+    <a href="<?= htmlspecialchars($config["base_path"]) ?>/download/<?= htmlspecialchars($upload["token"]) ?>/file">Download</a>
 </body>
 </html>
