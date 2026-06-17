@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/../../core/encryption.php';
-
 class UploadService {
     private $db;
 
@@ -10,15 +8,12 @@ class UploadService {
     }
 
     public function uploadFile($userId, $title, $description, $file) {
-        // define alle paths/tokens
         $uploadPath = __DIR__ . "/../../public/uploads/";
         $uploadName = uniqid() . "_" . basename($file["name"]);
          
         // Genereer een willekeurige unieke code voor de downloadlink
-        $key = random_bytes(32); // Genereert 32 random bits
-        $token = generateToken(); // Token wordt gegenereerd
-        $encryptedToken = encryptToken($token, $key); // Token wordt encrypt
-
+        $token = bin2hex(random_bytes(16));
+        
         // Verplaats het bestand van de tijdelijke map naar de uploadmap
         move_uploaded_file($file["tmp_name"], $uploadPath . $uploadName);
 
@@ -34,7 +29,8 @@ class UploadService {
                 'title' => $title,
                 'description' => $description,
                 'filename' => $uploadName,
-                'token' => $encryptedToken
+                'file_hash' => $fileHash,
+                'token' => $token
             ]
         );
 

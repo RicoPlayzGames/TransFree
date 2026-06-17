@@ -65,10 +65,15 @@ $router->post('/upload', function() use ($db) {
 $router->get('/download/:token', function($token) use ($db, $config) {
     $uploadModel = new UploadModel($db);
     $upload = $uploadModel->getUploadByToken($token);
-    
+
+    if (!$upload) {
+        http_response_code(404);
+        echo "Upload niet gevonden.";
+        return;
+    }
+
     require "views/download.php";
 });
-
 $router->get('/download/:token/file', function($token) use ($db) {
     $controller = new DownloadController($db);
     $controller->downloadFile($token);
