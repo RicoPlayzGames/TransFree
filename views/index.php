@@ -33,7 +33,11 @@ $uploadModel = new UploadModel($db);
 
         <div class="hero-buttons">
             <a href="<?php echo $config["base_path"] ?>/upload" class="hero-primary">Upload File</a>
-            <a href="<?php echo $config["base_path"] ?>/register" class="hero-secondary">Get Started</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="<?php echo $config["base_path"] ?>/logout" class="hero-secondary">Logout</a>
+            <?php else: ?>
+                <a href="<?php echo $config["base_path"] ?>/register" class="hero-secondary">Get Started</a>
+            <?php endif; ?>
         </div>
     </section>
 </body>
