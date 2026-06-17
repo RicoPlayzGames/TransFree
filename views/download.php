@@ -1,9 +1,12 @@
 <?php
+
 if (!isset($_SESSION["user_id"])) {
-    header("Location: login");
+    header("Location: " . $config["base_path"] . "/login");
     exit;
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
