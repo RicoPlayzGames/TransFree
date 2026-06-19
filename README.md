@@ -2,11 +2,11 @@
 
 # TransFree
 
-[![Stars](https://img.shields.io/github/stars/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/stargazers)
-[![Open Issues](https://img.shields.io/github/issues/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/commits/main)
-[![Top Language](https://img.shields.io/github/languages/top/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree)
-[![Made with PHP](https://img.shields.io/badge/Made%20with-PHP-5B4FE8?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
+[![Sterren](https://img.shields.io/github/stars/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/stargazers)
+[![Open problemen](https://img.shields.io/github/issues/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/issues)
+[![Laatste commit](https://img.shields.io/github/last-commit/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/commits/main)
+[![Codeer talen](https://img.shields.io/github/languages/top/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree)
+[![Gemaakt met PHP](https://img.shields.io/badge/Made%20with-PHP-5B4FE8?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
 
 Een website waar je files kan uploaden en downloaden
 
