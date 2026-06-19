@@ -2,11 +2,12 @@
 if (!isset($config)) {
     $config = require __DIR__ . "/../../config/Config.php";
 }
+$config = require __DIR__ . "/../../config/Config.php";
 ?>
 <nav class="navbar">
-    <a href="<?php echo $config["base_path"] ?>" class="navbar-brand">
+    <a href="<?php echo htmlspecialchars($config["base_path"]) ?>" class="navbar-brand">
         <span class="navbar-mark">
-            <image src="<?php echo $config["base_path"] ?>/public/assets/icons/plus.svg">
+            <img src="<?php echo htmlspecialchars($config["base_path"]) ?>/public/assets/icons/plus.svg" alt="TransFree logo">
         </span>
         <div>
             Trans<span class="navbar-accent">Free</span>

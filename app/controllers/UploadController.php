@@ -16,16 +16,23 @@ class UploadController {
         $title = $_POST['title'];
         $description = $_POST['description'];
         $file = $_FILES['file'];
-        // Sla het bestand op en krijg een unieke code terug
-        $token = $this->uploadService->uploadFile(
-            $userId, 
-            $title, 
-            $description, 
-            $file
-        );
-    // Maak de downloadlink aan met de unieke code
-        $downloadUrl = $this->config['base_path'] . "/download/" . $token;
+        try {
+            // Sla het bestand op en krijg een unieke code terug
+            $token = $this->uploadService->uploadFile(
+                $userId,
+                $title,
+                $description,
+                $file
+            );
 
-        require __DIR__ . "/../../views/notifications/upload-succes.php";
+            // Maak de downloadlink aan met de unieke code
+            $downloadUrl = $this->config['base_path'] . "/download/" . $token;
+
+            $message = 'File uploaded successfully. Use the download URL below.';
+            require __DIR__ . "/../../views/notifications/upload-success.php";
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            require __DIR__ . "/../../views/notifications/upload-error.php";
+        }
     }
 }

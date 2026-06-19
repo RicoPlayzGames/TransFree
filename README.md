@@ -2,58 +2,31 @@
 
 # TransFree
 
-[![Stars](https://img.shields.io/github/stars/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/stargazers)
-[![Open Issues](https://img.shields.io/github/issues/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/commits/main)
-[![Top Language](https://img.shields.io/github/languages/top/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree)
-[![Made with PHP](https://img.shields.io/badge/Made%20with-PHP-5B4FE8?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
+[![Sterren](https://img.shields.io/github/stars/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/stargazers)
+[![Open problemen](https://img.shields.io/github/issues/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/issues)
+[![Laatste commit](https://img.shields.io/github/last-commit/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree/commits/main)
+[![Codeer talen](https://img.shields.io/github/languages/top/RicoPlayzGames/TransFree?style=flat-square&color=5B4FE8)](https://github.com/RicoPlayzGames/TransFree)
+[![Gemaakt met PHP](https://img.shields.io/badge/Made%20with-PHP-5B4FE8?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
 
-A Website to Upload files and transfer to other devices
+Een website waar je files kan uploaden en downloaden
 
 ## Project Status
 
-We currently have the core upload and download functionality fully implemented and working.
-We are also actively working on adding a comment system for uploaded files.
-At this stage, there are no other unfinished features besides the ongoing comment system implementation.
+We hebben op dit moment de core upload en download functionaliteiten volledig geïmplementeerd en werkend.
 
-## Security Measures
+## Beveiligingsmaatregeling
 
-- Session Protection on Upload
-- Session Protection on Download
-- Integrety Checks on Upload/Download
+- Sessie protectie bij upload.
+- Sessie protectie bij download.
+- Integriteit checks bij upload/download.
 
-## Test Results
+## Test Resultaten
 
-The core upload and download functionality is working, but there are still several usability improvements planned:
+De core upload en download functionaliteiten werken, maar er zijn nog steeds meerdere bruikbaarheden verbeteringen gepland:
 
-- The **Get Started** button currently does not change when a user is logged in.
-- There is currently **no visual indication that a user is logged in**.
-- Users cannot **log out** yet.
-- File uploads do not provide a clear **success or failure message**.
-- After uploading, users only receive a share link and must manually copy it.
-- A dedicated **Copy Link** button is planned for easier sharing.
-- Users currently cannot view their **previously uploaded files**.
-- A file history/dashboard page is planned for managing uploaded files.
-
-## Installation:
-1. Clone repository:
-
-```bash
-git clone https://github.com/RicoPlayzGames/TransFree.git
-cd transfree
-```
-
-2. Update Config:
-
-```bash
-cd Config
-```
-
-```bash
-Windows (CMD):
-copy Config.example.php Config.php
-
-Windows (PowerShell):
-Copy-Item Config.example.php Config.php
-```
-Edit the config to use your database.
+- De "get started" knop veranderd op dit moment niet wanneer een user is ingelogd.
+- Er is op dit moment geen visuele indicatie dat een user is ingelogd.
+- Eeen gebruiker kan nog niet uitloggen.
+- Geüploade bestanden geven niet duidelijk aan of het succesvol is geüpload of niet.
+- Na het uploaden, hebben gebruikers aleen een link die ze handmatig moeten kopiëren inplaats van een "kopiër link" knop.
+- Gebruikers kunnen op dit moment niet vorige geüploade bestanden terug zien op bijvoorbeeld een dashboard.
