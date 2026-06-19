@@ -13,8 +13,6 @@ Een website waar je files kan uploaden en downloaden
 ## Project Status
 
 We hebben op dit moment de core upload en download functionaliteiten volledig geïmplementeerd en werkend.
-We werken ook actief om een comment systeem toe te voegen voor geüploade files.
-Op dit moment, zijn er geen onvoltooide features behalve de lopende comment systeem implementatie.
 
 ## Beveiligingsmaatregeling
 
