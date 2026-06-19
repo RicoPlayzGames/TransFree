@@ -10,11 +10,45 @@ class AuthController {
     }
 
     public function register() {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $repeatPassword = $_POST['repeat-password'];
+        $username = trim($_POST['name'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $repeatPassword = $_POST['password_confirm'] ?? '';
 
+        $errors = [];
+        if ($username === '' || $email === '' || $password === '') {
+            $errors[] = 'Please fill in all fields';
+        }
+
+        if ($password !== $repeatPassword) {
+            $errors[] = 'Passwords do not match';
+        }
+
+        if (!empty($errors)) {
+            $_SESSION['flash_error'] = implode(' - ', $errors);
+            header("Location: " . $this->config['base_path'] . "/register");
+            exit;
+        }
+
+        try {
+            $this->authService->registerUser($username, $email, $password);
+        } catch (Exception $e) {
+            $_SESSION['flash_error'] = $e->getMessage();
+            header("Location: " . $this->config['base_path'] . "/register");
+            exit;
+        }
+
+        header("Location: " . $this->config['base_path'] . "/upload");
+        exit;
+    }
+
+    public function login() {
+        $name = trim($_POST['name'] ?? '');
+        $password = $_POST['password'] ?? '';
+
+        if ($name === '' || $password === '') {
+            $_SESSION['flash_error'] = 'Fill in all fields';
+            header("Location: " . $this->config['base_path'] . "/login");
         if (!$username || !$email || !$password) {
             $_SESSION['error'] = 'Please fill in all fields.';
             header('Location: ' . $this->config['base_path'] . '/register');
@@ -51,6 +85,12 @@ class AuthController {
         $success = $this->authService->loginUser($name, $password);
 
         if (!$success) {
+            $_SESSION['flash_error'] = 'Invalid credentials';
+            header("Location: " . $this->config['base_path'] . "/login");
+            exit;
+        }
+
+        header("Location: " . $this->config['base_path'] . "/upload");
             $_SESSION['error'] = 'Invalid username or password.';
             header('Location: ' . $this->config['base_path'] . '/login');
             exit;
