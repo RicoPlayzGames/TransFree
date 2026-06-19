@@ -15,8 +15,8 @@ $uploadModel = new UploadModel($db);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trans Free</title>
-    <link rel="stylesheet" href="public/css/navbar.css">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/navbar.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/style.css">
 </head>
 <body>
     <?php require_once __DIR__ . "/partials/navbar.php"; ?>

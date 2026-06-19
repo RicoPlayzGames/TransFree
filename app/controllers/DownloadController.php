@@ -13,6 +13,9 @@ class DownloadController {
             // haal de file info op
             $file = $this->downloadService->getFileDownload($token);
 
+            // Logs voor download link
+            $this->downloadService->logDownload($file['user_id'], $token, $file['filename']);
+
             // zet headers zodat hij download
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="' . basename($file['filename']) . '"');
@@ -22,9 +25,10 @@ class DownloadController {
             readfile($file['path']);
             exit;
         } catch (Exception $e) {
-            // foutmelding als het bestand niet bestaat
-            http_response_code(409);
-            echo "Error: " . htmlspecialchars($e->getMessage());
+            // toon een gebruiksvriendelijke foutpagina
+            http_response_code(404);
+            $message = $e->getMessage();
+            require __DIR__ . "/../../views/error.php";
         }
     }
 }

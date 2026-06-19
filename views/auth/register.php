@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../core/Database.php";
 require_once __DIR__ . "/../../app/services/AuthService.php";
 require_once __DIR__ . "/../../app/controllers/AuthController.php";
 
-$config = require "config/Config.php";
+$config = require __DIR__ . "/../../config/Config.php";
 $db = new Database($config);
 ?>
 
@@ -13,8 +13,9 @@ $db = new Database($config);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | TransFree</title>
-    <link rel="stylesheet" href="public/css/navbar.css">
-    <link rel="stylesheet" href="public/css/login.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/navbar.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/style.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/login.css">
 </head>
 <body>
     <?php require_once __DIR__ . "/../partials/navbar.php"; ?>
