@@ -13,8 +13,8 @@ if (!isset($_SESSION["user_id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($config['app_name']) ?></title>
-    <link rel="stylesheet" href="../public/css/download.css">
-    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/download.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/navbar.css">
 </head>
 <body>
 

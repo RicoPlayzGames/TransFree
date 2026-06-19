@@ -22,13 +22,13 @@ class DownloadService {
 
         // als er niks is fout geven
         if (!$record) {
-            echo "File not found";
+            throw new Exception('File not found.');
         }
 
         $filePath = $uploadPath . $record['filename'];
 
         if (!file_exists($filePath)) {
-            echo "File does not exist";
+            throw new Exception('File is deleted or no longer exists on the server.');
         }
 
         // hash bij het bestand maken
@@ -36,7 +36,7 @@ class DownloadService {
 
         // gebruik hash equals om de hashes te vergelijken
         if (!hash_equals($record['file_hash'], $currentHash)) {
-            echo "File changed!!!!";
+            throw new Exception('File is not the same (integrety check failed).');
         }
 
         // returnen
