@@ -30,3 +30,13 @@ De core upload en download functionaliteiten werken, maar er zijn nog steeds mee
 - Geüploade bestanden geven niet duidelijk aan of het succesvol is geüpload of niet.
 - Na het uploaden, hebben gebruikers aleen een link die ze handmatig moeten kopiëren inplaats van een "kopiër link" knop.
 - Gebruikers kunnen op dit moment niet vorige geüploade bestanden terug zien op bijvoorbeeld een dashboard.
+
+
+## Updates Dag 4.
+We hebben de laatste groote functies toegevoegd, deze:
+
+- User Links CRUD Systeem
+- Admin Dashboard Toegevoegd met User/Link/Log overzicht
+- User Dashboard Toegevoegd met Link Overzicht
+- Mooie fout/success meldingen toegevoegd
+- Logging toegevoegd op Download/Upload die op admin dashboard te zien is.
