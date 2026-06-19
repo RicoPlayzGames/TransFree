@@ -26,58 +26,27 @@ class AuthController {
 
         if (!empty($errors)) {
             $_SESSION['flash_error'] = implode(' - ', $errors);
-            header("Location: " . $this->config['base_path'] . "/register");
+            header('Location: ' . $this->config['base_path'] . '/register');
             exit;
         }
 
         try {
             $this->authService->registerUser($username, $email, $password);
+            $_SESSION['flash_success'] = 'Registration successful. You are now logged in.';
+            header('Location: ' . $this->config['base_path'] . '/upload');
+            exit;
         } catch (Exception $e) {
             $_SESSION['flash_error'] = $e->getMessage();
-            header("Location: " . $this->config['base_path'] . "/register");
+            header('Location: ' . $this->config['base_path'] . '/register');
             exit;
         }
-
-        header("Location: " . $this->config['base_path'] . "/upload");
-        exit;
     }
-
     public function login() {
         $name = trim($_POST['name'] ?? '');
         $password = $_POST['password'] ?? '';
 
         if ($name === '' || $password === '') {
-            $_SESSION['flash_error'] = 'Fill in all fields';
-            header("Location: " . $this->config['base_path'] . "/login");
-        if (!$username || !$email || !$password) {
-            $_SESSION['error'] = 'Please fill in all fields.';
-            header('Location: ' . $this->config['base_path'] . '/register');
-            exit;
-        }
-
-        if ($password !== $repeatPassword) {
-            $_SESSION['error'] = 'Passwords do not match.';
-            header('Location: ' . $this->config['base_path'] . '/register');
-            exit;
-        }
-
-        try {
-            $this->authService->registerUser($username, $email, $password);
-            header('Location: ' . $this->config['base_path'] . '/upload');
-            exit;
-        } catch (Exception $e) {
-            $_SESSION['error'] = $e->getMessage();
-            header('Location: ' . $this->config['base_path'] . '/register');
-            exit;
-        }
-    }
-
-    public function login() {
-        $name = $_POST['name'];
-        $password = $_POST['password'];
-
-        if (!$name || !$password) {
-            $_SESSION['error'] = 'Please fill in all fields.';
+            $_SESSION['flash_error'] = 'Please fill in all fields.';
             header('Location: ' . $this->config['base_path'] . '/login');
             exit;
         }
@@ -85,13 +54,7 @@ class AuthController {
         $success = $this->authService->loginUser($name, $password);
 
         if (!$success) {
-            $_SESSION['flash_error'] = 'Invalid credentials';
-            header("Location: " . $this->config['base_path'] . "/login");
-            exit;
-        }
-
-        header("Location: " . $this->config['base_path'] . "/upload");
-            $_SESSION['error'] = 'Invalid username or password.';
+            $_SESSION['flash_error'] = 'Username or password is incorrect.';
             header('Location: ' . $this->config['base_path'] . '/login');
             exit;
         }
