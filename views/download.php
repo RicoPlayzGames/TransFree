@@ -28,9 +28,5 @@ if (!isset($_SESSION["user_id"])) {
             </a>
         </div>
     </div>
-
-    <h1>Download <?= htmlspecialchars($upload["title"]) ?></h1>
-
-    <a href="<?= htmlspecialchars($config["base_path"]) ?>/download/<?= htmlspecialchars($token) ?>/file">Download</a>
 </body>
 </html>
