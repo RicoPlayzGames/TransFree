@@ -47,6 +47,7 @@ class DownloadService {
         ];
     }
 
+    // Logged de download in de admin dashboard.
     public function logDownload($uploaderId, $token, $filename) {
         $ipAddress = $_SERVER['REMOTE_ADDR'] ?? null;
         $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;

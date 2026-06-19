@@ -52,7 +52,7 @@ if (!isset($_SESSION["user_id"])) {
             </form>
 
             <div class="upload-footer">
-                <p>Only PNG files are allowed. Maximum 5 MB.</p>
+                <p>PNG, mp4, txt, md, log, zip, rar, 7z files are allowed. Maximum 5 MB.</p>
             </div>
         </div>
     </div>

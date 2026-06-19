@@ -38,6 +38,7 @@ class AuthService {
         $_SESSION["role"] = $user["role"];
     }
 
+    // Functie voor de gebruiker om in te loggen
     public function loginUser($name, $password) {
         $user = $this->db->queryDatabase(
             "SELECT * FROM users WHERE email = :name OR username = :name",

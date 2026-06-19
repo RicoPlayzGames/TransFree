@@ -1,5 +1,5 @@
 <?php
-
+// Admin dashboard
 class AdminController {
     private $db;
     private $userModel;
@@ -24,6 +24,7 @@ class AdminController {
         }
     }
 
+    // Verwijder user
     public function deleteUser($id) {
         $this->ensureAdmin();
         $this->userModel->deleteUserById($id);
@@ -32,6 +33,7 @@ class AdminController {
         exit;
     }
 
+    // Update de role van de gebruiker via de dashboard
     public function updateUserRole($id) {
         $this->ensureAdmin();
         $role = $_POST['role'] ?? 'gebruiker';
@@ -40,6 +42,7 @@ class AdminController {
         exit;
     }
 
+    // Verwijder de upload van een gebruiker via de dashboard
     public function deleteUpload($id) {
         $this->ensureAdmin();
         $upload = $this->db->queryDatabase(
@@ -50,6 +53,7 @@ class AdminController {
         if ($upload) {
             $uploadPath = __DIR__ . "/../../public/uploads/" . $upload['filename'];
             if (file_exists($uploadPath)) {
+            // Verwijderd de upload vn de server
                 @unlink($uploadPath);
             }
 

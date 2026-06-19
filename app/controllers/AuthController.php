@@ -1,5 +1,5 @@
 <?php
-
+// Haalt de request op uit auth service
 class AuthController {
     private $authService;
     private $config;

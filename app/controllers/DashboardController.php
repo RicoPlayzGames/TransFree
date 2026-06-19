@@ -1,5 +1,5 @@
 <?php
-
+// Gebruiker dashboard
 class DashboardController {
     private $uploadService;
     private $uploadModel;
@@ -11,25 +11,7 @@ class DashboardController {
         $this->config = require __DIR__ . "/../../config/Config.php";
     }
 
-    public function editForm($id) {
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /login");
-            exit;
-        }
-
-        $userId = $_SESSION['user_id'];
-        $upload = $this->uploadModel->getUploadById($id);
-
-        if (!$upload || $upload['user_id'] != $userId) {
-            http_response_code(404);
-            echo "Upload niet gevonden of geen toegang.";
-            return;
-        }
-
-        $config = $this->config;
-        require __DIR__ . "/../../views/dashboard/edit.php";
-    }
-
+    // Titel of descriptie editen
     public function update($id) {
         if (!isset($_SESSION['user_id'])) {
             header("Location: /login");
@@ -46,6 +28,7 @@ class DashboardController {
         exit;
     }
 
+    // Delete de upload
     public function delete($id) {
         if (!isset($_SESSION['user_id'])) {
             header("Location: /login");
