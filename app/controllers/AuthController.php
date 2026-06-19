@@ -10,40 +10,57 @@ class AuthController {
     }
 
     public function register() {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $repeatPassword = $_POST['repeat-password'];
+        $username = trim($_POST['name'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $repeatPassword = $_POST['password_confirm'] ?? '';
 
-        if (!$username || !$email || !$password) {
-            echo "Please fill in all fields";
+        $errors = [];
+        if ($username === '' || $email === '' || $password === '') {
+            $errors[] = 'Please fill in all fields';
         }
 
         if ($password !== $repeatPassword) {
-            echo "Passwords do not match";
+            $errors[] = 'Passwords do not match';
         }
 
-        $this->authService->registerUser($username, $email, $password);
+        if (!empty($errors)) {
+            $_SESSION['flash_error'] = implode(' - ', $errors);
+            header("Location: " . $this->config['base_path'] . "/register");
+            exit;
+        }
 
-        header("Location: upload");
+        try {
+            $this->authService->registerUser($username, $email, $password);
+        } catch (Exception $e) {
+            $_SESSION['flash_error'] = $e->getMessage();
+            header("Location: " . $this->config['base_path'] . "/register");
+            exit;
+        }
+
+        header("Location: " . $this->config['base_path'] . "/upload");
         exit;
     }
 
     public function login() {
-        $name = $_POST['name'];
-        $password = $_POST['passsword'];
+        $name = trim($_POST['name'] ?? '');
+        $password = $_POST['password'] ?? '';
 
-        if (!$name || !$password) {
-            echo "Fill in all fields buddy";
+        if ($name === '' || $password === '') {
+            $_SESSION['flash_error'] = 'Fill in all fields';
+            header("Location: " . $this->config['base_path'] . "/login");
+            exit;
         }
 
         $success = $this->authService->loginUser($name, $password);
 
         if (!$success) {
-            echo "Invalid credentials";
+            $_SESSION['flash_error'] = 'Invalid credentials';
+            header("Location: " . $this->config['base_path'] . "/login");
+            exit;
         }
 
-        header("Location: upload");
+        header("Location: " . $this->config['base_path'] . "/upload");
         exit;
     }
 }

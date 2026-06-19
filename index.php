@@ -12,6 +12,8 @@ require_once "app/controllers/UploadController.php";
 require_once "app/controllers/DownloadController.php";
 require_once "app/controllers/AuthController.php";
 require_once "app/controllers/LogoutController.php";
+require_once "app/controllers/DashboardController.php";
+require_once "app/controllers/AdminController.php";
 
 require_once "app/models/UploadModel.php";
 require_once "app/models/UserModel.php";
@@ -78,6 +80,78 @@ $router->get('/download/:token', function($token) use ($db, $config) {
 $router->get('/download/:token/file', function($token) use ($db) {
     $controller = new DownloadController($db);
     $controller->downloadFile($token);
+});
+
+$router->get('/dashboard', function() use ($db, $config) {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: " . $config['base_path'] . "/login");
+        exit;
+    }
+
+    $uploadService = new UploadService($db);
+    $uploads = $uploadService->listUploadsByUser($_SESSION['user_id']);
+
+    require "views/dashboard/index.php";
+});
+
+$router->get('/dashboard/edit/:id', function($id) use ($db, $config) {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: " . $config['base_path'] . "/login");
+        exit;
+    }
+
+    $uploadModel = new UploadModel($db);
+    $upload = $uploadModel->getUploadById($id);
+
+    if (!$upload || $upload['user_id'] != $_SESSION['user_id']) {
+        http_response_code(404);
+        echo "Upload not found or access denied.";
+        return;
+    }
+
+    $config = $config;
+    require "views/dashboard/edit.php";
+});
+
+$router->post('/dashboard/edit/:id', function($id) use ($db) {
+    $controller = new DashboardController($db);
+    $controller->update($id);
+});
+
+$router->post('/dashboard/delete/:id', function($id) use ($db) {
+    $controller = new DashboardController($db);
+    $controller->delete($id);
+});
+
+// Admin routes
+$router->get('/admin', function() use ($db, $config) {
+    if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
+        http_response_code(403);
+        echo "Forbidden";
+        return;
+    }
+
+    $userModel = new UserModel($db);
+    $users = $userModel->getAllUsers();
+
+    $uploads = $db->queryDatabase("SELECT u.*, usr.username FROM uploads u LEFT JOIN users usr ON u.user_id = usr.id ORDER BY u.created_at DESC", [])->fetchAll();
+
+    require "views/admin/index.php";
+});
+
+$router->post('/admin/users/delete/:id', function($id) use ($db) {
+    $controller = new AdminController($db);
+    $controller->deleteUser($id);
+});
+
+$router->post('/admin/users/role/:id', function($id) use ($db) {
+    $controller = new AdminController($db);
+    $controller->updateUserRole($id);
+});
+
+$router->post('/admin/uploads/delete/:id', function($id) use ($db) {
+    $controller = new AdminController($db);
+    $controller->deleteUpload($id);
 });
 
 $router->resolve();

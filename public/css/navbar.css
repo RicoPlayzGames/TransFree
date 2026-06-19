@@ -78,6 +78,18 @@
     color: #1A1A2E;
 }
 
+/* Admin link highlight */
+.navbar-links .admin-link {
+    color: #ff4fa3;
+    font-weight: 700;
+    border: 1px solid rgba(255,79,163,0.12);
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+.navbar-links .admin-link:hover {
+    background: #fff0f7;
+}
+
 .navbar-auth {
     display: flex;
     align-items: center;

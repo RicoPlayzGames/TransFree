@@ -37,4 +37,50 @@ class UploadService {
         // return token voor download url
         return $token;
     }
+
+    // Haal uploads op voor een gebruiker
+    public function listUploadsByUser($userId) {
+        return $this->db->queryDatabase(
+            "SELECT * FROM uploads WHERE user_id = :user_id ORDER BY created_at DESC",
+            ['user_id' => $userId]
+        )->fetchAll();
+    }
+
+    // Werk metadata bij (titel/beschrijving)
+    public function updateMetadata($id, $userId, $title, $description) {
+        $this->db->queryDatabase(
+            "UPDATE uploads SET title = :title, description = :description WHERE id = :id AND user_id = :user_id",
+            [
+                'id' => $id,
+                'user_id' => $userId,
+                'title' => $title,
+                'description' => $description
+            ]
+        );
+        return true;
+    }
+
+    // Verwijder upload: bestand en database record
+    public function deleteUpload($id, $userId) {
+        $upload = $this->db->queryDatabase(
+            "SELECT * FROM uploads WHERE id = :id AND user_id = :user_id",
+            ['id' => $id, 'user_id' => $userId]
+        )->fetch();
+
+        if (!$upload) {
+            return false;
+        }
+
+        $uploadPath = __DIR__ . "/../../public/uploads/" . $upload['filename'];
+        if (file_exists($uploadPath)) {
+            @unlink($uploadPath);
+        }
+
+        $this->db->queryDatabase(
+            "DELETE FROM uploads WHERE id = :id AND user_id = :user_id",
+            ['id' => $id, 'user_id' => $userId]
+        );
+
+        return true;
+    }
 }
