@@ -40,3 +40,5 @@ We hebben de laatste groote functies toegevoegd, deze:
 - User Dashboard Toegevoegd met Link Overzicht
 - Mooie fout/success meldingen toegevoegd
 - Logging toegevoegd op Download/Upload die op admin dashboard te zien is.
+
+We hebben veel nieuwe ideeën bedacht en deze opgeschrven in de trello.
