@@ -39,7 +39,13 @@ if (!isset($_SESSION["user_id"])) {
 
                 <div class="form-group">
                     <label for="file-upload">Choose a file</label>
-                    <input id="file-upload" type="file" accept=".png" name="file" required>
+                        <input
+                            id="file-upload"
+                            type="file"
+                            name="file"
+                            accept="image/*,video/*,.txt,.md,.log,.zip,.rar,.7z"
+                            required
+                        >
                 </div>
 
                 <button type="submit" class="upload-button">Upload</button>
