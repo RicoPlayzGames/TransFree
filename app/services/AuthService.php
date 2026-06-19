@@ -8,6 +8,10 @@ class AuthService {
     }
 
     public function registerUser($username, $email, $password) {
+        // hash voor wachtwoorden:
+        // PHP Password_hash om een hash te maken
+        // `PASSWORD_DEFAULT` voor het algoritme
+        // hash komt in de database
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $this->db->queryDatabase(
@@ -46,6 +50,7 @@ class AuthService {
             return false;
         }
 
+        // vergelijk het wachtwoord met de hash uit de database:
         if (!password_verify($password, $user['password'])) {
             return false;
         }

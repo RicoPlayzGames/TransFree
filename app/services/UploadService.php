@@ -11,13 +11,13 @@ class UploadService {
         $uploadPath = __DIR__ . "/../../public/uploads/";
         $uploadName = uniqid() . "_" . basename($file["name"]);
          
-        // Genereer een willekeurige unieke code voor de downloadlink
+        // unieke token maken
         $token = bin2hex(random_bytes(16));
         
         // Verplaats het bestand van de tijdelijke map naar de uploadmap
         move_uploaded_file($file["tmp_name"], $uploadPath . $uploadName);
 
-        // maak een hash bij de file
+        // hash het bestand voor integriteit
         $fileHash = hash_file('sha256', $uploadPath . $uploadName);
 
         // Sla alle gegevens op in de database

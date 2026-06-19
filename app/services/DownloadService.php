@@ -31,10 +31,10 @@ class DownloadService {
             echo "File does not exist";
         }
 
-        // huidige nieuwe hash maken
+        // hash bij het bestand maken
         $currentHash = hash_file('sha256', $filePath);
 
-        // als de hash anders is fout geven
+        // gebruik hash equals om de hashes te vergelijken
         if (!hash_equals($record['file_hash'], $currentHash)) {
             echo "File changed!!!!";
         }
