@@ -23,7 +23,7 @@ if (!isset($_SESSION["user_id"])) {
     <div class="main-content">
         <div class="download-container">
             <h1>Download <?= htmlspecialchars($upload["title"]) ?></h1>
-            <a class="btn-download" href="<?php echo $config["base_path"] ?>/public/uploads/<?php echo $upload["filename"] ?>">
+            <a class="btn-download" href="<?= htmlspecialchars($config["base_path"]) ?>/download/<?= htmlspecialchars($token) ?>/file">
                 Download Bestand
             </a>
         </div>
