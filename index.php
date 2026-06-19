@@ -136,6 +136,11 @@ $router->get('/admin', function() use ($db, $config) {
 
     $uploads = $db->queryDatabase("SELECT u.*, usr.username FROM uploads u LEFT JOIN users usr ON u.user_id = usr.id ORDER BY u.created_at DESC", [])->fetchAll();
 
+    $logs = $db->queryDatabase(
+        "SELECT l.*, usr.username FROM logs l LEFT JOIN users usr ON l.user_id = usr.id WHERE l.type = 'info' ORDER BY l.created_at DESC LIMIT 100",
+        []
+    )->fetchAll();
+
     require "views/admin/index.php";
 });
 

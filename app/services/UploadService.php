@@ -58,6 +58,24 @@ class UploadService {
             ]
         );
 
+        // voegt en slaat logregel op in de database 
+        $ipAddress = $_SERVER['REMOTE_ADDR'] ?? null;
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+        $browser = $userAgent ? substr($userAgent, 0, 30) : null;
+        $content = "Upload: stored_name={$uploadName}; original_name=" . ($file['name'] ?? '') . "; title=" . ($title ?? '');
+
+        $this->db->queryDatabase(
+            "INSERT INTO logs (type, content, user_id, ip_address, browser, created_at)
+            VALUES (:type, :content, :user_id, :ip_address, :browser, NOW())",
+            [
+                'type' => 'info',
+                'content' => $content,
+                'user_id' => $userId,
+                'ip_address' => $ipAddress,
+                'browser' => $browser
+            ]
+        );
+
         // return token voor download url
         return $token;
     }

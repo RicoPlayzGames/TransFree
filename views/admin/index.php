@@ -76,6 +76,30 @@
         <?php endif; ?>
     </section>
 
+    <section style="margin-top:32px">
+        <h2>Algemeen Logs</h2>
+        <?php if (empty($logs)): ?>
+            <p>No upload logs found.</p>
+        <?php else: ?>
+            <table class="dashboard-table">
+                <thead>
+                    <tr><th>User</th><th>Event</th><th>IP</th><th>Browser</th><th>Created</th></tr>
+                </thead>
+                <tbody>
+                <?php foreach ($logs as $log): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($log['username'] ?? 'User '.$log['user_id']); ?></td>
+                        <td><?php echo htmlspecialchars($log['content']); ?></td>
+                        <td><?php echo htmlspecialchars($log['ip_address']); ?></td>
+                        <td><?php echo htmlspecialchars($log['browser']); ?></td>
+                        <td><?php echo $log['created_at']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </section>
+
 </div>
 </body>
 </html>

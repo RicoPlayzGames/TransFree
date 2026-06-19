@@ -13,6 +13,9 @@ class DownloadController {
             // haal de file info op
             $file = $this->downloadService->getFileDownload($token);
 
+            // Logs voor download link
+            $this->downloadService->logDownload($file['user_id'], $token, $file['filename']);
+
             // zet headers zodat hij download
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="' . basename($file['filename']) . '"');
