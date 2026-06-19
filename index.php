@@ -11,6 +11,7 @@ require_once "core/Helper.php";
 require_once "app/controllers/UploadController.php";
 require_once "app/controllers/DownloadController.php";
 require_once "app/controllers/AuthController.php";
+require_once "app/controllers/LogoutController.php";
 
 require_once "app/models/UploadModel.php";
 require_once "app/models/UserModel.php";
