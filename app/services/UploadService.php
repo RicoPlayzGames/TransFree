@@ -23,14 +23,14 @@ class UploadService {
             throw new Exception('Upload failed (file could not be uploaded).');
         }
 
-        // Optional: limit file size (5MB) and allowed types (PNG)
-        if ($file['size'] > 5 * 1024 * 1024) {
-            throw new Exception('File is too large. Maximum 5 MB allowed.');
+        // Optional: limit file size (32MB) and allowed types (PNG, MP4, JPG and ZIP)
+        if ($file['size'] > 32 * 1024 * 1024) {
+            throw new Exception('File is too large. Maximum 32 MB allowed.');
         }
 
-        $allowed = ['image/png'];
+        $allowed = ['image/png', 'video/mp4', 'image/jpeg', 'application/zip', 'application/x-zip-compressed', 'multipart/x-zip', 'application/octet-stream'];
         if (!in_array($file['type'], $allowed)) {
-            throw new Exception('Invalid file type. Only PNG files are allowed.');
+            throw new Exception('Invalid file type. Only PNG, MP4, JPG and ZIP files are allowed.');
         }
 
         // Verplaats het bestand van de tijdelijke map naar de uploadmap
