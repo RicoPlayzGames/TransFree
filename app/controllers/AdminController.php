@@ -37,9 +37,37 @@ class AdminController {
     // Update de role van de gebruiker via de dashboard
     public function updateUserRole($id) {
         $this->ensureAdmin();
+        $currentUserId = $_SESSION['user_id'] ?? null;
+        if ($currentUserId && intval($currentUserId) === intval($id)) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('cannot_change_own_role'));
+            exit;
+        }
+
         $role = $_POST['role'] ?? 'gebruiker';
+        $allowed = ['gebruiker', 'admin'];
+        if (!in_array($role, $allowed)) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('invalid_role'));
+            exit;
+        }
+
+        $password = $_POST['admin_password'] ?? '';
+        if (empty($password)) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('missing_password'));
+            exit;
+        }
+
+        $row = $this->db->queryDatabase(
+            "SELECT password FROM users WHERE id = :id",
+            ['id' => $currentUserId]
+        )->fetch();
+
+        if (!$row || !password_verify($password, $row['password'])) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('invalid_password'));
+            exit;
+        }
+
         $this->userModel->updateUserRole($id, $role);
-        header("Location: " . $this->config['base_path'] . "/admin");
+        header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('role_updated'));
         exit;
     }
 

@@ -149,6 +149,19 @@ $router->post('/admin/users/delete/:id', function($id) use ($db) {
     $controller->deleteUser($id);
 });
 
+$router->get('/admin/users/role/confirm/:id', function($id) use ($db, $config) {
+    if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
+        http_response_code(403);
+        echo "Forbidden";
+        return;
+    }
+
+    $userModel = new UserModel($db);
+    $user = $userModel->getUserById($id);
+
+    require "views/admin/confirm_role.php";
+});
+
 $router->post('/admin/users/role/:id', function($id) use ($db) {
     $controller = new AdminController($db);
     $controller->updateUserRole($id);
