@@ -1,4 +1,5 @@
 <?php
+//laad de configuratie
 $config = require __DIR__ . "/../../config/Config.php";
 if (!isset($error)) $error = 'Something went wrong while uploading..';
 ?>

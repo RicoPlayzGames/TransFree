@@ -7,6 +7,7 @@ class UploadController {
     public function __construct($db) {
         // Maak een nieuwe uploadservice aan en laad de configuratie
         $this->uploadService = new UploadService($db);
+        // Laad de configuratie
         $this->config = require __DIR__ . "/../../config/Config.php";
     }
 
@@ -29,9 +30,11 @@ class UploadController {
             $downloadUrl = $this->config['base_path'] . "/download/" . $token;
 
             $message = 'File uploaded successfully. Use the download URL below.';
+            // Toont de succesmelding
             require __DIR__ . "/../../views/notifications/upload-success.php";
         } catch (Exception $e) {
             $error = $e->getMessage();
+            // Toont de foutmelding
             require __DIR__ . "/../../views/notifications/upload-error.php";
         }
     }

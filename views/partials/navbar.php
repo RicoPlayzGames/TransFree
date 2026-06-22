@@ -1,5 +1,6 @@
 <?php
 if (!isset($config)) {
+    // Laad de configuratie als deze nog niet is geladen
     $config = require __DIR__ . "/../../config/Config.php";
 }
 $config = require __DIR__ . "/../../config/Config.php";

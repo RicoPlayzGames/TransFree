@@ -8,6 +8,7 @@ class DashboardController {
     public function __construct($db) {
         $this->uploadService = new UploadService($db);
         $this->uploadModel = new UploadModel($db);
+        // Laad de configuratie
         $this->config = require __DIR__ . "/../../config/Config.php";
     }
 

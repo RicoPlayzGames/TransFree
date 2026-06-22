@@ -1,4 +1,5 @@
 <?php
+// Laad de benodigde bestanden
 require_once __DIR__ . "/../core/Database.php";
 require_once __DIR__ . "/../app/models/UploadModel.php";
 

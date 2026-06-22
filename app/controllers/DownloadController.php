@@ -28,6 +28,7 @@ class DownloadController {
             // toon een gebruiksvriendelijke foutpagina
             http_response_code(404);
             $message = $e->getMessage();
+            // Laad de foutpagina
             require __DIR__ . "/../../views/error.php";
         }
     }

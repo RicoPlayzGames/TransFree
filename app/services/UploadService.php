@@ -8,6 +8,7 @@ class UploadService {
     }
 
     public function uploadFile($userId, $title, $description, $file) {
+        // Definieer het uploadpad en genereer een unieke bestandsnaam
         $uploadPath = __DIR__ . "/../../public/uploads/";
         $uploadName = uniqid() . "_" . basename($file["name"]);
          
@@ -113,6 +114,7 @@ class UploadService {
             return false;
         }
 
+        // Verwijder het bestand van de server
         $uploadPath = __DIR__ . "/../../public/uploads/" . $upload['filename'];
         if (file_exists($uploadPath)) {
             @unlink($uploadPath);

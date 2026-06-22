@@ -12,6 +12,7 @@ class AdminController {
         $this->userModel = new UserModel($db);
         $this->uploadModel = new UploadModel($db);
         $this->uploadService = new UploadService($db);
+        // Laad de configuratie
         $this->config = require __DIR__ . "/../../config/Config.php";
     }
 

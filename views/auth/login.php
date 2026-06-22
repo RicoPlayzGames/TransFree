@@ -1,4 +1,5 @@
 <?php
+// required files directions
 require_once __DIR__ . "/../../core/Database.php";
 require_once __DIR__ . "/../../app/services/AuthService.php";
 require_once __DIR__ . "/../../app/controllers/AuthController.php";
