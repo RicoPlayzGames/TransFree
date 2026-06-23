@@ -24,6 +24,22 @@ class AuthController {
             $errors[] = 'Passwords do not match';
         }
 
+        if (strlen($username) < 3 || strlen($username) > 50) {
+            $errors[] = 'Username must be between 3 and 50 characters';
+        }
+
+        if (strlen($email) > 255) {
+            $errors[] = 'Email may not exceed 255 characters';
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Please enter a valid email address';
+        }
+
+        if (strlen($password) < 8 || strlen($password) > 255) {
+            $errors[] = 'Password must be between 8 and 255 characters';
+        }
+
         if (!empty($errors)) {
             $_SESSION['flash_error'] = implode(' - ', $errors);
             header('Location: ' . $this->config['base_path'] . '/register');
@@ -41,13 +57,27 @@ class AuthController {
             exit;
         }
     }
-    
+
     public function login() {
         $name = trim($_POST['name'] ?? '');
         $password = $_POST['password'] ?? '';
 
+        $errors = [];
+
         if ($name === '' || $password === '') {
-            $_SESSION['flash_error'] = 'Please fill in all fields.';
+            $errors[] = 'Please fill in all fields.';
+        }
+
+        if (strlen($name) > 255) {
+            $errors[] = 'Username or email may not exceed 255 characters.';
+        }
+
+        if (strlen($password) > 255) {
+            $errors[] = 'Password may not exceed 255 characters.';
+        }
+
+        if (!empty($errors)) {
+            $_SESSION['flash_error'] = implode(' ', $errors);
             header('Location: ' . $this->config['base_path'] . '/login');
             exit;
         }
@@ -59,6 +89,9 @@ class AuthController {
             header('Location: ' . $this->config['base_path'] . '/login');
             exit;
         }
+
+        // session regeneraten bij login, voorkomt dat mensen bestaande sessie id's misbruikn
+        session_regenerate_id(true);
 
         if ($_SESSION['role'] === 'admin') {
             header('Location: ' . $this->config['base_path'] . '/admin');

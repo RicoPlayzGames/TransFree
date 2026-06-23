@@ -68,6 +68,11 @@ body {
     color: #1A1A2E;
 }
 
+.form-group span {
+    font-size: 10px;
+    opacity: 0.5;
+}
+
 .form-group input {
     padding: 12px 14px;
     border: 1px solid #e0e0e0;

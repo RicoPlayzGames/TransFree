@@ -36,12 +36,12 @@ $db = new Database($config);
             <form class="login-form" action="login" method="POST">
                 <div class="form-group">
                     <label for="name">Username or Email</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your username or email" required>
+                    <input id="name" type="text" name="name" placeholder="Enter your username or email" maxlength="255" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input id="password" type="password" name="password" placeholder="Enter your password" required>
+                    <input id="password" type="password" name="password" placeholder="Enter your password" maxlength="255" required>
                 </div>
 
                 <button type="submit" class="login-button">Login</button>
