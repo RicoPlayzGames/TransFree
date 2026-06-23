@@ -21,6 +21,13 @@ $db = new Database($config);
 <body>
     <?php require_once __DIR__ . "/../partials/navbar.php"; ?>
 
+    <?php if (!empty($_SESSION['flash_error'])): ?>
+        <div class="error">
+            <?= htmlspecialchars($_SESSION['flash_error']) ?>
+        </div>
+        <?php unset($_SESSION['flash_error']); ?>
+    <?php endif; ?>
+
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
@@ -31,22 +38,23 @@ $db = new Database($config);
             <form class="login-form" action="register" method="POST">
                 <div class="form-group">
                     <label for="name">Username</label>
-                    <input id="name" type="text" name="name" placeholder="Choose a username" required>
+                    <input id="name" type="text" name="name" placeholder="Choose a username" maxlength="255" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" name="email" placeholder="your@email.com" required>
+                    <input id="email" type="email" name="email" placeholder="your@email.com" maxlength="255" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input id="password" type="password" name="password" placeholder="Create a password" required>
+                    <span>Must be 8 characters</span>
+                    <input id="password" type="password" name="password" placeholder="Create a password" maxlength="255" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password_confirm">Confirm Password</label>
-                    <input id="password_confirm" type="password" name="password_confirm" placeholder="Repeat your password" required>
+                    <input id="password_confirm" type="password" name="password_confirm" placeholder="Repeat your password" maxlength="255" required>
                 </div>
 
                 <button type="submit" class="login-button">Register</button>
