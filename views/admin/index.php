@@ -1,3 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) { 
+    session_start(); 
+} 
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -41,31 +47,39 @@
                 </thead>
                 <tbody>
                 <?php foreach ($users as $u): ?>
+                    <?php
+                        $isSelf = isset($_SESSION['user_id'])
+                            && intval($_SESSION['user_id']) === intval($u['id']);
+                        ?>
+                    
                     <tr>
                         <td><?php echo htmlspecialchars($u['username']); ?></td>
                         <td><?php echo htmlspecialchars($u['email']); ?></td>
                         <td><?php echo htmlspecialchars($u['role']); ?></td>
                         <td><?php echo $u['created_at']; ?></td>
                         <td class="actions">
-                            <?php if (session_status() == PHP_SESSION_NONE) { session_start(); } ?>
-                            <?php $isSelf = isset($_SESSION['user_id']) && intval($_SESSION['user_id']) === intval($u['id']); ?>
-
-                            <form action="#" method="get" class="role-control" onsubmit="return false;">
-                                <select name="role" id="role-select-<?php echo $u['id']; ?>" <?php echo $isSelf ? 'disabled' : ''; ?> >
-                                    <option value="gebruiker" <?php echo $u['role'] === 'gebruiker' ? 'selected' : '' ?>>User</option>
-                                    <option value="admin" <?php echo $u['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
-                                </select>
-                                <button class="btn" type="button" onclick="redirectToConfirm(<?php echo $u['id']; ?>)" <?php echo $isSelf ? 'disabled' : ''; ?>>Update</button>
-                                <?php if ($isSelf): ?>
-                                    <span style="margin-left:8px;color:#a00;font-size:0.9rem">You cannot change your own role</span>
-                                <?php endif; ?>
-                            </form>
-
                             <?php if ($isSelf): ?>
-                                <span style="display:block;margin-top:6px;color:#a00;font-size:0.9rem">You cannot delete your own account</span>
+                                <span style="color:#666;font-size:0.9rem;">
+                                    Current account
+                                </span>
                             <?php else: ?>
-                                <div style="margin-top:6px; display:inline-block">
-                                    <button type="button" class="action-delete" onclick="redirectToConfirmDelete(<?php echo $u['id']; ?>)">Delete</button>
+                                <form action="#" method="get" class="role-control" onsubmit="return false;">
+                                    <select name="role" id="role-select-<?php echo $u['id']; ?>">
+                                        <option value="gebruiker" <?php echo $u['role'] === 'gebruiker' ? 'selected' : '' ?>>User</option>
+                                        <option value="admin" <?php echo $u['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                                    </select>
+
+                                    <button class="btn" type="button"
+                                        onclick="redirectToConfirm(<?php echo $u['id']; ?>)">
+                                        Update
+                                    </button>
+                                </form>
+
+                                <div style="margin-top:6px;">
+                                    <button type="button" class="action-delete"
+                                        onclick="redirectToConfirmDelete(<?php echo $u['id']; ?>)">
+                                        Delete
+                                    </button>
                                 </div>
                             <?php endif; ?>
                         </td>
