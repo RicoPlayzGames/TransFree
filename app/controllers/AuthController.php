@@ -33,7 +33,7 @@ class AuthController {
         try {
             $this->authService->registerUser($username, $email, $password);
             $_SESSION['flash_success'] = 'Registration successful. You are now logged in.';
-            header('Location: ' . $this->config['base_path'] . '/upload');
+            header('Location: ' . $this->config['base_path'] . '/dashboard');
             exit;
         } catch (Exception $e) {
             $_SESSION['flash_error'] = $e->getMessage();
@@ -41,6 +41,7 @@ class AuthController {
             exit;
         }
     }
+    
     public function login() {
         $name = trim($_POST['name'] ?? '');
         $password = $_POST['password'] ?? '';
@@ -59,7 +60,12 @@ class AuthController {
             exit;
         }
 
-        header('Location: ' . $this->config['base_path'] . '/upload');
+        if ($_SESSION['role'] === 'admin') {
+            header('Location: ' . $this->config['base_path'] . '/admin');
+        } else {
+            header('Location: ' . $this->config['base_path'] . '/dashboard');
+        }
+
         exit;
     }
 }

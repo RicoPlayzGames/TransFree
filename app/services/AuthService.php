@@ -36,6 +36,13 @@ class AuthService {
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["email"] = $user["email"];
         $_SESSION["role"] = $user["role"];
+
+        return $this->db->queryDatabase(
+            "SELECT * FROM users WHERE email = :email",
+            [
+                "email" => $email
+            ]
+        )->fetch();
     }
 
     // Functie voor de gebruiker om in te loggen
@@ -47,12 +54,7 @@ class AuthService {
             ]
         )->fetch();
 
-        if (!$user) {
-            return false;
-        }
-
-        // vergelijk het wachtwoord met de hash uit de database:
-        if (!password_verify($password, $user['password'])) {
+        if (!$user || !password_verify($password, $user['password'])) {
             return false;
         }
 
@@ -61,6 +63,6 @@ class AuthService {
         $_SESSION["email"] = $user["email"];
         $_SESSION["role"] = $user["role"];
 
-        return true;
+        return $user;
     }
 }
