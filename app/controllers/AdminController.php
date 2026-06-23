@@ -28,9 +28,33 @@ class AdminController {
     // Verwijder user
     public function deleteUser($id) {
         $this->ensureAdmin();
-        $this->userModel->deleteUserById($id);
 
-        header("Location: " . $this->config['base_path'] . "/admin");
+        $currentUserId = $_SESSION['user_id'] ?? null;
+
+        // Voorkom dat een admin zichzelf verwijdert
+        if ($currentUserId && intval($currentUserId) === intval($id)) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('cannot_delete_own_account'));
+            exit;
+        }
+
+        $password = $_POST['admin_password'] ?? '';
+        if (empty($password)) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('missing_password'));
+            exit;
+        }
+
+        $row = $this->db->queryDatabase(
+            "SELECT password FROM users WHERE id = :id",
+            ['id' => $currentUserId]
+        )->fetch();
+
+        if (!$row || !password_verify($password, $row['password'])) {
+            header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('invalid_password'));
+            exit;
+        }
+
+        $this->userModel->deleteUserById($id);
+        header("Location: " . $this->config['base_path'] . "/admin?msg=" . urlencode('user_deleted'));
         exit;
     }
 

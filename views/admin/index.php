@@ -15,9 +15,11 @@
         switch ($_GET['msg']) {
             case 'cannot_change_own_role': $statusMsg = 'You cannot change your own role.'; break;
             case 'missing_password': $statusMsg = 'Please enter your password to confirm the change.'; break;
-            case 'invalid_password': $statusMsg = 'Invalid password. Role not changed.'; break;
+            case 'invalid_password': $statusMsg = 'Invalid password. Action not performed.'; break;
             case 'invalid_role': $statusMsg = 'Invalid role selected.'; break;
             case 'role_updated': $statusMsg = 'Role updated successfully.'; break;
+            case 'cannot_delete_own_account': $statusMsg = 'You cannot delete your own account.'; break;
+            case 'user_deleted': $statusMsg = 'User deleted successfully.'; break;
             default: $statusMsg = ''; break;
         }
     }
@@ -47,28 +49,25 @@
                         <td class="actions">
                             <?php if (session_status() == PHP_SESSION_NONE) { session_start(); } ?>
                             <?php $isSelf = isset($_SESSION['user_id']) && intval($_SESSION['user_id']) === intval($u['id']); ?>
+
                             <form action="#" method="get" class="role-control" onsubmit="return false;">
                                 <select name="role" id="role-select-<?php echo $u['id']; ?>" <?php echo $isSelf ? 'disabled' : ''; ?> >
                                     <option value="gebruiker" <?php echo $u['role'] === 'gebruiker' ? 'selected' : '' ?>>User</option>
                                     <option value="admin" <?php echo $u['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
- <script>
- function redirectToConfirm(id) {
-     var sel = document.getElementById('role-select-' + id);
-     if (!sel) return;
-     var role = sel.value;
-     var base = '<?php echo $config['base_path']; ?>';
-     window.location.href = base + '/admin/users/role/confirm/' + id + '?role=' + encodeURIComponent(role);
- }
- </script>
                                 </select>
                                 <button class="btn" type="button" onclick="redirectToConfirm(<?php echo $u['id']; ?>)" <?php echo $isSelf ? 'disabled' : ''; ?>>Update</button>
                                 <?php if ($isSelf): ?>
                                     <span style="margin-left:8px;color:#a00;font-size:0.9rem">You cannot change your own role</span>
                                 <?php endif; ?>
                             </form>
-                            <form action="<?php echo $config['base_path'] ?>/admin/users/delete/<?php echo $u['id']; ?>" method="post" class="action-form" onsubmit="return confirm('Delete user?')">
-                                <button type="submit" class="action-delete">Delete</button>
-                            </form>
+
+                            <?php if ($isSelf): ?>
+                                <span style="display:block;margin-top:6px;color:#a00;font-size:0.9rem">You cannot delete your own account</span>
+                            <?php else: ?>
+                                <div style="margin-top:6px; display:inline-block">
+                                    <button type="button" class="action-delete" onclick="redirectToConfirmDelete(<?php echo $u['id']; ?>)">Delete</button>
+                                </div>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -131,5 +130,20 @@
     </section>
 
 </div>
+
+<script>
+function redirectToConfirm(id) {
+    var sel = document.getElementById('role-select-' + id);
+    if (!sel) return;
+    var role = sel.value;
+    var base = '<?php echo $config['base_path']; ?>';
+    window.location.href = base + '/admin/users/role/confirm/' + id + '?role=' + encodeURIComponent(role);
+}
+
+function redirectToConfirmDelete(id) {
+    var base = '<?php echo $config['base_path']; ?>';
+    window.location.href = base + '/admin/users/delete/confirm/' + id;
+}
+</script>
 </body>
 </html>
