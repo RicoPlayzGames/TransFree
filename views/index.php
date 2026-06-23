@@ -19,6 +19,22 @@ $stats = $uploadModel->getStats();
     <title>Trans Free</title>
     <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/navbar.css">
     <link rel="stylesheet" href="<?= htmlspecialchars($config['base_path']) ?>/public/css/style.css">
+
+    <meta name="description" content="Upload and share files instantly with secure links. No hassle, no signup needed.">
+    <meta name="theme-color" content="#4f46e5">
+
+    <meta property="og:title" content="Trans Free - Share files without hassle">
+    <meta property="og:description" content="Upload your files and share instantly with a secure link. No nonsense.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?= htmlspecialchars($config['base_path']) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($config['base_path']) ?>/public/assets/banner.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trans Free - Share files without hassle">
+    <meta name="twitter:description" content="Upload your files and share instantly with a secure link. No nonsense.">
+    <meta name="twitter:image" content="<?= htmlspecialchars($config['base_path']) ?>/public/assets/banner.png">
+
+    <meta property="og:site_name" content="Trans Free">
 </head>
 <body>
     <?php require_once __DIR__ . "/partials/navbar.php"; ?>
