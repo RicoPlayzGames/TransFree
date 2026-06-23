@@ -29,12 +29,12 @@ if (!isset($_SESSION["user_id"])) {
             <form class="upload-form" action="<?= $config['base_path'] ?>/upload" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input id="title" type="text" name="title" placeholder="Give your file a title" required>
+                    <input id="title" type="text" name="title" placeholder="Give your file a title" maxlength="255" required>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" placeholder="Add a short description"></textarea>
+                    <textarea id="description" name="description" placeholder="Add a short description" maxlength="2000"></textarea>
                 </div>
 
                 <div class="form-group">
