@@ -55,4 +55,41 @@ class UploadModel {
             ]
         );
     }
+
+    // Stat s voor homepage
+    public function getStats() {
+        $files = $this->db->queryDatabase("
+            SELECT COUNT(*) AS total_files
+            FROM uploads
+        ")->fetch();
+
+        $users = $this->db->queryDatabase("
+            SELECT COUNT(*) AS total_users 
+            FROM users
+        ")->fetch();
+
+        $folderSize = $this->getUploadsSize(__DIR__ . "/../../public/uploads");
+
+        return [
+            'total_files' => $files['total_files'] ?? 0,
+            'total_users' => $users['total_users'] ?? 0,
+            'total_bytes' => $folderSize
+        ];
+    }
+
+    public function getUploadsSize($path) {
+        $size = 0;
+
+        if (!is_dir($path)) {
+            return 0;
+        }
+
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $file) {
+            if ($file->isFile()) {
+                $size += $file->getSize();
+            }
+        }
+
+        return $size;
+    }
 }
