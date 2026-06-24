@@ -121,6 +121,12 @@ $router->post('/dashboard/delete/:id', function($id) use ($db) {
     $controller->delete($id);
 });
 
+// Bulk delete for dashboard
+$router->post('/dashboard/delete-multiple', function() use ($db) {
+    $controller = new DashboardController($db);
+    $controller->deleteMultiple();
+});
+
 // Admin routes
 $router->get('/admin', function() use ($db, $config) {
     if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
@@ -181,6 +187,12 @@ $router->post('/admin/users/role/:id', function($id) use ($db) {
 $router->post('/admin/uploads/delete/:id', function($id) use ($db) {
     $controller = new AdminController($db);
     $controller->deleteUpload($id);
+});
+
+// Bulk delete for admin uploads
+$router->post('/admin/uploads/delete-multiple', function() use ($db) {
+    $controller = new AdminController($db);
+    $controller->deleteUploads();
 });
 
 $router->resolve();
