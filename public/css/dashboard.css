@@ -88,7 +88,7 @@ thead th {
 }
 
 tbody td {
-    padding: 10px 14px;
+    padding: 10px 12px;
     border-bottom: 1px solid #ffd6ea;
 }
 
@@ -137,6 +137,39 @@ table button:hover {
     table.dashboard-table td { padding:8px 6px; border:none; }
     table.dashboard-table td:before { content: attr(data-label); display:block; font-weight:600; color:#4B4960; margin-bottom:6px; }
 }
+
+/* Tighter table layout and checkbox styling */
+.dashboard-table th:first-child,
+.dashboard-table td:first-child {
+    width: 40px;
+    text-align: center;
+}
+
+.dashboard-table input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Make action buttons compact and remove heavy shadows */
+.action-link { padding:6px 8px; border-radius:6px; box-shadow:none; }
+.action-delete { padding:6px 10px; border-radius:6px; box-shadow:none; }
+
+/* Select all checkboxes in header: center visually */
+#select-all-dashboard, #select-all-admin-uploads { vertical-align: middle; }
+
+/* Prevent overly large hover transforms on small table buttons */
+table a:hover, table button:hover { transform: none; }
+
+/* Table card wrapper: make header one full-width colored band with rounded corners */
+.table-card { border-radius: 12px; overflow: hidden; border: 1px solid #f5eaf2; background: #fff; margin-bottom: 12px; }
+.table-card table { margin: 0; border-collapse: collapse; }
+.table-card thead { background: #ff4fa3; }
+.table-card thead th { background: transparent; color: #fff; padding: 12px 14px; font-weight:700; }
+.table-card tbody td { padding: 10px 14px; }
+.table-card thead th:first-child { text-align:center; }
 
 /* Additional styles for actions */
 .actions { display:flex; gap:8px; align-items:center; }

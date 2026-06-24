@@ -118,4 +118,40 @@ class AdminController {
         header("Location: " . $this->config['base_path'] . "/admin");
         exit;
     }
+
+    // Bulk delete uploads from admin dashboard
+    public function deleteUploads() {
+        $this->ensureAdmin();
+
+        $ids = $_POST['ids'] ?? [];
+        if (!is_array($ids)) {
+            header("Location: " . $this->config['base_path'] . "/admin");
+            exit;
+        }
+
+        foreach ($ids as $id) {
+            $id = intval($id);
+            if ($id <= 0) continue;
+
+            $upload = $this->db->queryDatabase(
+                "SELECT * FROM uploads WHERE id = :id",
+                ['id' => $id]
+            )->fetch();
+
+            if ($upload) {
+                $uploadPath = __DIR__ . "/../../public/uploads/" . $upload['filename'];
+                if (file_exists($uploadPath)) {
+                    @unlink($uploadPath);
+                }
+
+                $this->db->queryDatabase(
+                    "DELETE FROM uploads WHERE id = :id",
+                    ['id' => $id]
+                );
+            }
+        }
+
+        header("Location: " . $this->config['base_path'] . "/admin");
+        exit;
+    }
 }

@@ -17,9 +17,12 @@
         <?php if (empty($uploads)): ?>
         <p>You have no uploads yet.</p>
         <?php else: ?>
+            <form method="post" action="<?php echo $config['base_path'] . '/dashboard/delete-multiple'; ?>" onsubmit="return confirm('Delete selected uploads?')">
+            <div class="table-card">
             <table class="dashboard-table">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" id="select-all-dashboard"></th>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Link</th>
@@ -30,6 +33,7 @@
                 <tbody>
                 <?php foreach ($uploads as $u): ?>
                     <tr>
+                        <td><input type="checkbox" name="ids[]" value="<?php echo intval($u['id']); ?>"></td>
                         <td><?php echo htmlspecialchars($u['title']); ?></td>
                         <td><?php echo htmlspecialchars($u['description']); ?></td>
                         <td><a href="<?php echo $config['base_path'] . '/download/' . $u['token']; ?>" target="_blank">View</a></td>
@@ -44,6 +48,17 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
+            <div style="margin-top:12px;">
+                <button type="submit" class="action-delete">Delete selected</button>
+            </div>
+            </form>
+            <script>
+            document.getElementById('select-all-dashboard').addEventListener('change', function(e){
+                var checked = e.target.checked;
+                document.querySelectorAll('input[name="ids[]"]').forEach(function(cb){ cb.checked = checked; });
+            });
+            </script>
         <?php endif; ?>
     </div>
 </body>

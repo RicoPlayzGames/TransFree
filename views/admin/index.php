@@ -95,13 +95,16 @@ if (session_status() == PHP_SESSION_NONE) {
         <?php if (empty($uploads)): ?>
             <p>No uploads found.</p>
         <?php else: ?>
+            <form method="post" action="<?php echo $config['base_path']; ?>/admin/uploads/delete-multiple" onsubmit="return confirm('Delete selected uploads?')">
+            <div class="table-card">
             <table class="dashboard-table">
                 <thead>
-                    <tr><th>Title</th><th>Owner</th><th>Filename</th><th>Created</th><th>Actions</th></tr>
+                    <tr><th><input type="checkbox" id="select-all-admin-uploads"></th><th>Title</th><th>Owner</th><th>Filename</th><th>Created</th><th>Actions</th></tr>
                 </thead>
                 <tbody>
                 <?php foreach ($uploads as $u): ?>
                     <tr>
+                        <td><input type="checkbox" name="ids[]" value="<?php echo intval($u['id']); ?>"></td>
                         <td><?php echo htmlspecialchars($u['title']); ?></td>
                         <td><?php echo htmlspecialchars($u['username'] ?? '—'); ?></td>
                         <td><?php echo htmlspecialchars($u['filename']); ?></td>
@@ -116,6 +119,17 @@ if (session_status() == PHP_SESSION_NONE) {
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
+            <div style="margin-top:12px;">
+                <button type="submit" class="action-delete">Delete selected</button>
+            </div>
+            </form>
+            <script>
+            document.getElementById('select-all-admin-uploads').addEventListener('change', function(e){
+                var checked = e.target.checked;
+                document.querySelectorAll('input[name="ids[]"]').forEach(function(cb){ cb.checked = checked; });
+            });
+            </script>
         <?php endif; ?>
     </section>
 

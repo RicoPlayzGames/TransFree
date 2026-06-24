@@ -42,4 +42,30 @@ class DashboardController {
         header("Location: " . $this->config['base_path'] . "/dashboard");
         exit;
     }
+
+    // Bulk delete uploads (selected in dashboard)
+    public function deleteMultiple() {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /login");
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
+        $ids = $_POST['ids'] ?? [];
+
+        if (!is_array($ids)) {
+            header("Location: " . $this->config['base_path'] . "/dashboard");
+            exit;
+        }
+
+        foreach ($ids as $id) {
+            $id = intval($id);
+            if ($id > 0) {
+                $this->uploadService->deleteUpload($id, $userId);
+            }
+        }
+
+        header("Location: " . $this->config['base_path'] . "/dashboard");
+        exit;
+    }
 }
