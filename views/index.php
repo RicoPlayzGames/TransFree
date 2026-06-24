@@ -75,7 +75,7 @@ $stats = $uploadModel->getStats();
 
                 <div class="stat-box">
                     <div class="stat-number">
-                        <?= $stats['total_bytes'] / 1024 / 1024 / 1024, 2 ?> GB
+                        <?= round($stats['total_bytes'] / 1024 , 2) ?> GB
                     </div>
                     <div class="stat-label">Data shared</div>
                 </div>
