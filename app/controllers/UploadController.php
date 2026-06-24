@@ -18,6 +18,8 @@ class UploadController {
         $description = $_POST['description'];
         $file = $_FILES['file'];
         try {
+            sleep(5);
+
             // Sla het bestand op en krijg een unieke code terug
             $token = $this->uploadService->uploadFile(
                 $userId,

@@ -51,10 +51,40 @@ if (!isset($_SESSION["user_id"])) {
                 <button type="submit" class="upload-button">Upload</button>
             </form>
 
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+
             <div class="upload-footer">
                 <p>Only PNG, jpg, jpeg, mp4, zip files are allowed. Maximum 32 MB.</p>
             </div>
         </div>
     </div>
+
+    <script>
+        document.querySelector('.upload-form').addEventListener('submit', function(e) {
+            const progressBar = document.querySelector('.progress-bar');
+            const container = document.querySelector('.progress-bar-container');
+            container.classList.add('active');
+            
+            let width = 0;
+            const duration = 5000; // 5sec
+            const startTime = Date.now();
+            
+            const interval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                width = (elapsed / duration) * 100;
+                
+                // niet boven 100
+                if (width > 100) width = 100;
+                
+                progressBar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                }
+            }, 50); // update elke 50ms
+        });
+    </script>
 </body>
 </html>
